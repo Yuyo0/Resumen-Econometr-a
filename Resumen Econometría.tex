@@ -1311,14 +1311,14 @@ desarrollar una teoría de estimación eficiente mediante MCO o para caracteriza
 exacta del estimador MCO, son necesarios unos supuestos más fuertes.
 
 \paragraph{El cuarto supuesto ampliado de mínimos cuadrados} es que $u_i$ es homocedástico; es decir,
-var($u_i|x_i$) = $\sigma^2_i$ es una constante. Si este supuesto adicional se cumple, el estimador MCO es eficiente
+var($u_i|x_i$) = $\sigma^2_u$ es una constante. Si este supuesto adicional se cumple, el estimador MCO es eficiente
 entre todos los estimadores lineales e insesgados, condicionado a $x_i$
 
 \paragraph{El quinto supuesto ampliado de mínimos cuadrados} es que la distribución condicional de $u_i$,
 dado $x_i$, es normal.
 
-Bajo todos estos supuestos $u_i$ es normal con media en cero y varianza $\sigma^2_i$ y la distribución condicional
-de $u_i|x_i$ es normal con media en cero y varianza en var($u_i|x_i$) = $\sigma^2_i$, la cual es $\sigma^2_i$ por el cuarto supuesto.
+Bajo todos estos supuestos $u_i$ es normal con media en cero y varianza $\sigma^2_u$ y la distribución condicional
+de $u_i|x_i$ es normal con media en cero y varianza en var($u_i|x_i$) = $\sigma^2_u$, la cual es $\sigma^2_u$ por el cuarto supuesto.
 $u_i$ y $x_i$ están distribuidas independientemente.
 
 Si se cumplen los cinco supuestos ampliados de mínimos cuadrados, el estimador MCO tiene una
@@ -1429,7 +1429,10 @@ Por la ley de los grandes números, el denominador converge en probabilidad a $\
 $$\sigma_{\hat{\beta}_1}^2=\frac{\mathrm{var}[(X_i-\mu_X)u_i]}{n\sigma_X^4}$$
 
 Expresado como esta en el libro:
-$$\sqrt{n}(\hat{\beta}_1-\beta_1)\overset{d}{\operatorname*{\to}}N\left(0,\frac{\mathrm{var}(v_i)}{[\mathrm{var}(X_i)]^2}\right)$$
+\begin{equation}
+\sqrt{n}(\hat{\beta}_1-\beta_1)\overset{d}{\operatorname*{\to}}N\left(0,\frac{\mathrm{var}(v_i)}{[\mathrm{var}(X_i)]^2}\right)
+\label{eq:17.12}
+\end{equation}
 
 Donde $v_i=(X_i-\mu_X)u_i$.
 
@@ -1472,11 +1475,13 @@ $$\frac{1}{n}\sum_{i=1}^{n}[(X_{i}-\bar{X})^{2}[u_i-(\hat{\beta}_0-\beta_0)-(\ha
 Como las estimaciones $\beta$ son consistentes se simplifica a:
 $$\frac{1}{n}\sum_{i=1}^{n}[(X_{i}-\bar{X})^{2}u_i^{2} -(X_{i}-\mu_{X})^{2}u_{i}^{2}]\xrightarrow{p}0$$
 
+Dado que la media de X es consistente, a medida que aumenta n este término tiende en probabilidad a cero, demostrandose así que $\frac{\hat{\sigma}_{\widehat{\beta}_1}^2}{\sigma_{\widehat{\beta}_1}^2}\xrightarrow{p}1$.
+
 \paragraph{Demostración} de que el estadístico t heterocedástico-robusto tiene una 
 distribución asintótica N(0,1) si se cumplen los 3 supuestos de MCO:
 $$t=\frac{\widehat{\beta}_1-\beta_{1,0}}{\widehat{\sigma}_{\widehat{\beta}_1}}=\frac{\sqrt{n}(\widehat{\beta}_1-\beta_{1,0})}{\sqrt{n\sigma_{\widehat{\beta}_1}^2}}\div\sqrt{\frac{\widehat{\sigma}_{\widehat{\beta}_1}^2}{\sigma_{\widehat{\beta}_1}^2}}$$
 
-Se deduce de los resultados anteriores que el primer término seguido a la igualdad converge en distribución a N(0,1), 
+Se deduce de los resultados anteriores (\ref{eq:17.12}) que el primer término seguido a la igualdad converge en distribución a N(0,1), 
 además por consistencia del error heterocedástico robusto, el segundo término converge en probabilidad a 1.
 Por teorema de Slutsky, el estadístico t heterocedástico-robusto converge en distribución a N(0,1).
 
@@ -1490,15 +1495,15 @@ Se presentan a continuación estos resultados para $\beta_1$:
 
 Si los errores son i.i.d. con distribución normal e independientes de los regresores, entonces la distribución 
 de $\beta_1$ condicionada a $X_1, \dots, X_n$, es $N(\beta_1, \sigma^2_{\beta_1|X})$, donde
-$$\sigma^2_{\beta_1|X}=\frac{\sigma_u^2}{\sum_{i=1}^{n}(X_i-\bar{X})^2}$$
+$$\sigma^2_{\hat{\beta}_1|X}=\frac{\sigma_u^2}{\sum_{i=1}^{n}(X_i-\bar{X})^2}$$
 
 Para verificar este debe establecerse primero que la distribución es normal
-, para esto debe tenerse en cuenta que condicionado a $x_i$, $\hat{\beta}_1-\beta_1$ 
+, para esto debe tenerse en cuenta que condicionado a las $x_i$, $\hat{\beta}_1-\beta_1$ 
 es una media ponderada de los errores $u_i$:
-$$\frac{1}{-}\sum_{i=1}^{n}(X_{i}-\bar{X})u_{i}\widehat{\beta}_1=\beta_1+\frac{n_i\sum_{i=1}^n(X_i-\bar{X})u_i}{\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})^2}$$
+$$\hat{\beta}_1=\beta_1+\frac{\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})u_i}{\frac{1}{n}\sum_{i=1}^n(X_i-\bar{X})^2}$$
 
-Por los supuestos 1, 2 , 4 y 5, $u_I$ es N(0,$\sigma_u^2$) e i.i.d., 
-entonces $u_I$ y $x_i$ estan independientemente distribuidas, dado que las medias ponderadas 
+Por los supuestos 1, 2 , 4 y 5, $u_i$ es N(0,$\sigma_u^2$) e i.i.d., 
+entonces $u_i$ y $x_i$ estan independientemente distribuidas, dado que las medias ponderadas 
 de las variables normales son normales, se deduce que $\hat{\beta}_1$ se distribuye normal condicionada a $x_i$. 
 
 En segundo lugar se toman las esperanzas condicionadas a ambos lados de la expresión anterior 
