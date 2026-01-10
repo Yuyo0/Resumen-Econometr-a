@@ -1178,6 +1178,7 @@ Donde la segunda igualdad se obtiene prque $E[(X_i - \mu_X)u_i]=0$ por el primer
 última igualdad se desprende de la ley de esperanzas iteradas. Si $u_i$ es homocedástico, su varianza es constante por lo que 
 $E[(X_{i}-\mu_{x})^{2}\mathrm{var}(u_{i}|X_{i})]=E[(X_{i}-\mu_{x})^{2}]\sigma^2_u=\sigma^2_X \sigma^2_u$. Sustituyendo esta expresión en el 
 númerador se llega a la varianza de $\hat{\beta}_1$ válida para homocedásticidad.
+$$\sigma^2_{\hat{\beta_1}}=\frac{\sigma^2_u}{n\sigma^2_X}$$
 
 Para el caso de $\hat{\beta_0}$ se comienza con el númerador donde puede sacarse $\hat{u}^2_i$ de la sumatoria dado que ahora su varianza es constante, y 
 el término $\hat{H}_i^2$ se cancela con el denominador, es decir:
@@ -1947,8 +1948,9 @@ un nuevo estadístico de contraste, el estadístico F.
 \section{Constrastes de hipótesis e IC para un único coeficiente}
 
 Para el caso de único regresor, era posible estimar la varianza del estimador MCO mediante sustitución
-de las medias muestrales por las esperanzas, lo que conducía a un estimador $\hat{\sigma}^2$. Bajo mínimos cuadrados,
-la ley de grandes números implica que las medias muestrales convergen a las poblacionales, siendo que $\hat{\sigma}^2/\sigma^2$ converge en probabilidad a $\sigma^2$. La raíz cuadrada de $\sigma^2$ es el error estándar del parámetro estimado, y
+de las medias muestrales por las esperanzas, lo que conducía a un estimador $\hat{\sigma}^2_{\hat{\beta}_1}$. Bajo mínimos cuadrados,
+la ley de grandes números implica que las medias muestrales convergen a las poblacionales, siendo que $\hat{\sigma}^2_{\hat{\beta}_1}/\sigma^2_{\hat{\beta}_1}$ 
+converge en probabilidad a $1$. La raíz cuadrada de $\sigma^2_{\hat{\beta}_1}$ es el error estándar del parámetro estimado, y
 es un estimador de la desviación típica de la distribución muestral del estimador. Todo esto es extensible
 a la regresión múltiple. Las ideas clave, la normalidad de los estimadores en muestras grandes y la
 posibilidad de estimar consistentemente la desviación típica de su distribución muestral, son las mismas,
@@ -2032,13 +2034,13 @@ Si el estadístico F se calcula utilizando la formula general heterocedástico-r
 muestras grandes bajo la hipótesis nula es $F_{q,\infty}$ independientemente de si los errores son homocedásticos
 o heterocedástico.
 
-El p-valor del estadístico F puede calcularse utilizando la aproximación de su distribución para mues-
-tras grandes, tal que:
+El p-valor del estadístico F puede calcularse utilizando la aproximación de su distribución para 
+muestras grandes, tal que:
 $$p-\mathrm{valor} = Pr(F_{q,\infty} > F^{act})$$
 
 El estadístico F general contrasta la hipótesis conjunta de que todos los coeficientes de las pendientes 
 son cero. Es decir, la hipótesis nula y la hipótesis alternativa son: $H_0 : \beta_1 = 0, \beta_2 = 0, . . . , \beta_k =0$ 
-vs. $H_1 : \beta_j \neq 0$ para al menos una $j; j = 1, . . . , k$ hipótesis nula, ninguna de las variables explicativas 
+vs. $H_1 : \beta_j \neq 0$ para al menos una $j; j = 1, . . . , k$. Bajo la hipótesis nula, ninguna de las variables explicativas 
 explica nada de la variabilidad de $Y_i$ , aunque el término independiente (que bajo la hipótesis nula
 es la media de $Y_i$) puede ser distinto de cero.
 
@@ -2046,7 +2048,7 @@ es la media de $Y_i$) puede ser distinto de cero.
     \item Cuando q=1, el estadístico F contrasta una única restricción. Entonces la hipótesis nula conjunta
 se reduce a la hipótesis nula sobre un solo coeficiente de regresión y el estadístico F es el estadístico
 t.
-    \item Un estadístico F elevado debería estar asociado con un aumento sustancial en el R2. Si el término
+    \item Un estadístico F elevado debería estar asociado con un aumento sustancial en el $R^2$. Si el término
 de error es homocedástico, el estadístico F puede expresarse en términos de mejora en el ajuste de
 la regresión, medida ya sea por la disminución de la suma de los cuadrados de los residuos o bien
 por el aumento del $R^2$ de la regresión. El estadístico F resultante se conoce como el estadístico F
@@ -2099,8 +2101,8 @@ En la práctica esto se realiza primero construyendo el nuevo regresor $W_i = X_
 $$Y_i = \beta_0 + \gamma_1 X_{1i} + \beta_2 W_i + u_i$$
 
 En general, es posible tener q restricciones bajo la hipótesis nula en las que algunas o todas estas
-restricciones implican a varios coeficientes. El estadístico F es extensible a este tipo de hipótesis conjun-
-tas, y puede calcularse por cualquiera de los dos métodos que acabamos de mencionar. La mejor manera
+restricciones implican a varios coeficientes. El estadístico F es extensible a este tipo de hipótesis conjuntas, 
+y puede calcularse por cualquiera de los dos métodos que acabamos de mencionar. La mejor manera
 de hacer esto en la práctica depende del software de regresión que en concreto se utilice
 
 \section{Conjuntos de confianza para varios coeficientes}
