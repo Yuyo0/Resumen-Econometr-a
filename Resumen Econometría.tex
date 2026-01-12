@@ -62,6 +62,7 @@
 
 % --- 6. COLORES Y CAJAS (MEJORADO) ---
 \usepackage{xcolor}
+\usepackage{varwidth}
 \usepackage[most]{tcolorbox} % 'most' carga librerías extra como skins
 
 % Tu color
@@ -69,21 +70,31 @@
 
 % Caja de Concepto Clave (Estilo Moderno)
 \newtcolorbox{conceptoclave}[1]{
-  enhanced, % Habilita opciones avanzadas
-  colback=stockwatsonblue!5!white, % Fondo muy suave
+  enhanced,
+  colback=stockwatsonblue!5!white,
   colframe=stockwatsonblue,        
-  coltitle=white,                   
-  title=\textbf{#1},
-  fonttitle=\sffamily\bfseries, % Título en Sans Serif
+  coltitle=white,
+  fonttitle=\sffamily\bfseries,
+  % --- CONFIGURACIÓN DE TÍTULO MULTILÍNEA ---
+  varwidth boxed title,
+  before title={\hypersetup{linkcolor=white, citecolor=white, urlcolor=white}},
+  title={#1}, 
   attach boxed title to top left={yshift*=-\tcboxedtitleheight/2, xshift=5mm},
-  boxed title style={colback=stockwatsonblue, sharp corners=south},
-  sharp corners=south, % Esquinas inferiores rectas, superiores curvas
+  boxed title style={
+    colback=stockwatsonblue, 
+    sharp corners=south,
+    size=small,
+    before upper=\raggedright
+  },
+  % --- DISEÑO DE LA CAJA ---
+  sharp corners=south,
   arc=3mm,
-  drop small lifted shadow, % Sombra suave para efecto 'papel'
-  top=4mm, % Espacio interno superior extra para no chocar con el título
-  before skip=10pt, % Espacio antes de la caja
-  after skip=10pt   % Espacio después de la caja
+  drop small lifted shadow,
+  top=5mm, 
+  before skip=10pt,
+  after skip=10pt
 }
+
 
 % --- 7. ENLACES Y REFERENCIAS ---
 \usepackage[colorlinks=true, linkcolor=stockwatsonblue, urlcolor=stockwatsonblue, citecolor=stockwatsonblue]{hyperref}
@@ -2258,7 +2269,7 @@ Los modelos de regresión poblacional no lineales con los que trabajamos son de 
 donde $f(X_{1i}, X_{2i}, \dots, X_{ki})$ es la función de regresión no lineal poblacional.
 
 \begin{conceptoclave}
-    {Concepto clave 8.1: El efecto esperado en Y de un cambio en $X_1$ en un modelo de regresión no lineal (\ref{eq:8.3})}
+    {Concepto clave 8.1: El efecto esperado en Y de un cambio en $X_1$ en un modelo de regresión \\ no lineal (\ref{eq:8.3})}
     La variación esperada en Y, $\Delta Y$, asociada con una variación en $X_1$, $\Delta X_1$, manteniendo 
     constantes $X_2$, ..., $X_k$, es la diferencia entre el valor de la función de regresión poblacional 
     antes y después de la variación de $X_1$, manteniendo constantes $X_2$, ..., $X_k$. Es decir, la 
@@ -2286,11 +2297,11 @@ $$ES(\Delta\hat{Y}) = \frac{|\Delta\hat{Y}|}{\sqrt{\frac{F}{v}}}$$
 donde v es el número de restricciones (en este caso, v = 1).
 
 El segundo método consiste en utilizar el «Método 2», lo que implica la transformación de las variables
-explicativas de modo que, en la regresión transformada.
+explicativas de modo que, en la regresión transformada se contraste un único coeficiente con un estadísitco t.
 
 En los modelos no lineales la función de regresión se interpreta mejor mediante su representación
-gráfica y mediante el cálculo del efecto esperado sobre Y de la variación de una o más variables indepen-
-dientes. La interpretación no suele ser la natural y habitual de los modelos lineales.
+gráfica y mediante el cálculo del efecto esperado sobre Y de la variación de una o más variables independientes
+. La interpretación no suele ser la natural y habitual de los modelos lineales.
 
 \paragraph{El método general para modelizar las funciones de regresión no
 lineales} consta de cinco pasos:
