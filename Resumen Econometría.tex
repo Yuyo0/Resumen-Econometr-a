@@ -2587,8 +2587,8 @@ Y y que esta correlacionada con uno o mas de los regresores incluidos en esa mis
     si se incluye una variable o un conjunto de variables en una regresión.
     \item \textit{Soluciones al sesgo de variable omitida cuando no se dispone de variables de control adecuadas:} no 
     es opción si no hay datos o no es adecuado. Podemos solucionar el sesgo de variable omitida de 3
-    formas: utilizando datos en los que se observa la misma unidad observacional en diferentes momen-
-    tos del tiempo (datos de panel), utilizando la regresión de variables instrumentales, o utilizando
+    formas: utilizando datos en los que se observa la misma unidad observacional en diferentes momentos 
+    del tiempo (datos de panel), utilizando la regresión de variables instrumentales, o utilizando
     un diseño de estudio en el que el efecto de interés se estudie mediante un experimento aleatorizado
     controlado.
 \end{itemize}
@@ -2601,8 +2601,8 @@ Y y que esta correlacionada con uno o mas de los regresores incluidos en esa mis
     que pueden ayudar a decidir si se debe incluir una variable adicional:
     \begin{enumerate}
         \item Ser específico acerca del coeficiente o coeficientes de interés.
-        \item Utilizar un razonamiento a priori para identificar las fuentes potenciales más impor-
-        tantes de sesgo de variable omitida, lo que lleva a una especificación base y a algunas
+        \item Utilizar un razonamiento a priori para identificar las fuentes potenciales más importantes 
+        de sesgo de variable omitida, lo que lleva a una especificación base y a algunas
         variables «cuestionables».
         \item Contrastar si otras variables de control «cuestionables» tienen un coeficiente distinto
         de cero. 
@@ -2643,7 +2643,7 @@ está correlacionado con $\tilde{X}_i$, entonces $\tilde{X}_i$ estará correlaci
 será sesgado e inconsistente, y la cuantía del sesgo dependerá de el error de medición.
 
 Supongamos que el valor medido es igual al verdadero valor no medible más un componente puramente
-aleatorio $W_i$, que tiene media igual a cero y varianza $\sigma^2_w$ Debido a que el error es puramente aleatorio,
+aleatorio $W_i$, que tiene media igual a cero y varianza $\sigma^2_w$. Debido a que el error es puramente aleatorio,
 podríamos suponer que $w_i$ no esta correlacionado con $X_i$ ni con el error de la regresión $u_i$. Este supuesto
 es el modelo clásico de error de medición en el que $\tilde{X}_i = X_i + w_i$, en el que $corr(w_i, X_i)=0$ y $\beta_1$ tiene
 el límite de probabilidad: 
@@ -2672,7 +2672,9 @@ Sabemos que $\hat{\beta}_1 \xrightarrow{p} \beta_1 + \frac{Cov(\tilde{X}_i, v_i)
 \begin{align*}
     Var(\tilde{X}_i) &= \sigma_X^2 + \sigma_w^2 \quad \text{(por independencia de } X \text{ y } w\text{)} \\
     Cov(\tilde{X}_i, v_i) &= Cov(X_i + w_i, u_i - \beta_1 w_i) \\
-    &= -\beta_1 Cov(w_i, w_i) = -\beta_1 \sigma_w^2
+    &= Cov(X_i, u_i) - \beta_1 Cov(X_i, w_i) + Cov(w_i, u_i) - \beta_1 Cov(w_i, w_i) \\
+    &= \underbrace{Cov(X_i, u_i)}_{=0 \text{ (Exogeneidad)}} - \underbrace{\beta_1 Cov(X_i, w_i)}_{=0 \text{ (Independencia de } w_i)} + \underbrace{Cov(w_i, u_i)}_{=0 \text{ (Independencia de } u_i)} - \beta_1 \underbrace{Cov(w_i, w_i)}_{=\sigma^2_w \text{ (Varianza)}} \\
+    &= -\beta_1 \sigma^2_w
 \end{align*}
 
 \textbf{4. Resultado Final}
@@ -2759,11 +2761,10 @@ en el que se anule el canal de la causalidad inversa (temas del capitulo 14 y 15
 
 \begin{conceptoclave}
     {Concepto clave 9.6: Sesgo por causalidad simultánea}
-    El sesgo por causalidad simultánea, asimismo denominado sesgo de ecuaciones simultá-
-neas, aparece en una regresión de Y sobre X, cuando, además del vínculo causal de
-interés que va desde X hacia Y, existe un vínculo causal desde Y hacia X. Esta causalidad
-inversa provoca que X esté correlacionado con el término de error en la regresión pobla-
-cional de interés.
+    El sesgo por causalidad simultánea, asimismo denominado sesgo de ecuaciones simultáneas, 
+    aparece en una regresión de Y sobre X, cuando, además del vínculo causal de 
+    interés que va desde X hacia Y, existe un vínculo causal desde Y hacia X. Esta causalidad inversa 
+    provoca que X esté correlacionado con el término de error en la regresión poblacional de interés.
 \end{conceptoclave}
 
 \subsection*{Origen de la inconsistencia de los errores estándar MCO}
