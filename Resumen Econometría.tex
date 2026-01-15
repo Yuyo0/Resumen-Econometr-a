@@ -3020,8 +3020,8 @@ atribuibles a factores como cambios en el impuesto sobre la cerveza y otros fact
 término de error. Las variables no observables que son constantes en el tiempo, como $Z_i$, se eliminan
 mediante esta especificación de diferencias.
 
-Este método de diferencias es útil cuando se disponen de datos para solo dos periodos. Sin em-
-bargo, cuando $T > 2$, es recomendable utilizar el método de efectos fijos, que permite analizar todas las
+Este método de diferencias es útil cuando se disponen de datos para solo dos periodos. Sin embargo, 
+cuando $T > 2$, es recomendable utilizar el método de efectos fijos, que permite analizar todas las
 observaciones disponibles sin descartar información valiosa.
 
 \section{Regresión de Efectos Fijos}
@@ -3055,7 +3055,7 @@ Para desarrollar el modelo de regresión de efectos fijos mediante variables bin
 binaria que es igual a 1 cuando i=1 y es igual a 0 en caso contrario, sea $D_{2i}$ igual a 1 cuando i=2 y
 es igual a 0 en caso contrario, y así sucesivamente. No pueden incluirse las n variables binarias además
 de un intercepto común porque si se hace, los regresores serán perfectamente multicolineales (esta es la
-“trampa de la variable ficticia”)
+“trampa de la variable ficticia”).
 \begin{equation}
 Y_{it}=\beta_{0}+\beta_{1}X_{it}+\gamma_{2}D_{2i}+\gamma_{3}D_{3i}+\cdots+\gamma_{n}D_{ni}+u_{it}
 \label{eq:10.11}
@@ -3072,7 +3072,7 @@ equivalentes por lo que el beta sera el mismo. Ademas, si se cumplen un conjunto
 supuestos de la regresión de efectos fijos—, entonces la distribución muestral del estimador MCO de efectos 
 fijos es normal en muestras grandes, la varianza de esta distribución puede estimarse a partir de los datos.
 
-\paragraph{Algoritmo MCO en desviaciones respecto de su media} El estimador CO de efectos fijos se
+\paragraph{Algoritmo MCO en desviaciones respecto de su media} El estimador MCO de efectos fijos se
 calcula utilizando las variables “en desviaciones respecto de su media”. En el caso de un solo regresor, se
 parte de la ecuación de efectos fijos y se toma diferencia respecto a la media en ambos
 lados de la ecuación. Así, para $\bar{Y_{i}}=\frac{1}{T}\sum_{t=1}^{T}Y_{it}$, $\bar{X_{i}}=\frac{1}{T}\sum_{t=1}^{T}X_{it}$, y $\bar{u_{i}}=\frac{1}{T}\sum_{t=1}^{T}u_{it}$. 
@@ -3106,11 +3106,11 @@ normal en muestras grandes. La varianza de esta distribución puede estimarse y 
 error estándar, se utiliza para la inferencia estadística, como el contraste de hipótesis (con el estadístico
 t) y la construcción de intervalos de confianza, de forma similar a los datos de sección cruzada.
 
-\section{Regresión son efectos fijos temporales}
+\section{Regresión con efectos fijos temporales}
 
 La regresión con \textbf{efectos fijos temporales} permiten tener en cuenta las variables que son constantes
-entre las entidades individuales, pero que evolucionan en el tiempo, como estándares de seguridad na-
-cionales. El modelo seria:
+entre las entidades individuales, pero que evolucionan en el tiempo, como estándares de seguridad 
+nacionales. El modelo seria:
 $$Y_{it}=\beta_0+\beta_1X_{it}+\beta_2Z_i+\beta_3S_t+u_{it}$$
 
 Donde el efecto de la seguridad del automóvil, se expresa mediante "S".
@@ -3167,9 +3167,11 @@ estándar para muestras grandes, es decir, de las distribuciones normal y F.
 
 Los supuestos de la regresión de efectos fijos extienden los supuestos clásicos de los mínimos cuadrados
 ordinarios (MCO) a los datos de panel. Bajo estos supuestos, el estimador de efectos fijos tiene una
-distribución asintóticamente normal cuando n es grande. El Supuesto 2 a diferencia de los datos de sección
-cruzada, el segundo supuesto para datos de panel permite que las variables estén correlacionadas dentro
-de una entidad individual a lo largo del tiempo. Por ejemplo, en datos de series temporales, es común
+distribución asintóticamente normal cuando n es grande. El homólogo para sección cruzada del Supuesto 2 sostiene 
+que cada observación es independiente, lo que surge en virtud de un muestreo aleatorio simple. Por el contrario, el 
+Supuesto 2 para datos de panel sostiene que las variables son independientes entre las distintas entidades individuales, 
+pero no impone ninguna restricción de ese tipo dentro de una entidad individual. Por ejemplo, el Supuesto 2 permite que 
+$X{it}$ esté correlacionada en el tiempo dentro de una entidad individual. Por ejemplo, en datos de series temporales, es común
 que las variables estén autocorrelacionadas, lo que significa que las observaciones en un periodo tienden
 a estar correlacionadas con las observaciones en periodos anteriores. Es decir, esta autocorrelacionada
 (correlacionada consigo misma, en diferentes periodos) o \textbf{serialmente correlacionada}.
@@ -3187,6 +3189,7 @@ a estar correlacionadas con las observaciones en periodos anteriores. Es decir, 
     \end{enumerate}
 
     Para regresores múltiples la $X_{it}$ debería reemplazarse por la lista completa $X_{1,it},\ldots,X_{k,it}$.
+\label{cc:10.3}
 \end{conceptoclave}
 
 \subsection*{Errores estándar agrupados HAC}
@@ -3216,10 +3219,10 @@ resulta en estimadores ineficientes.
 
 El modelo de efectos aleatorios asume que el efecto inobservable $a_i$ no está correlacionado con ninguna
 de las variables explicativas:
-\begin{equation*}
+\begin{equation}
 \mathrm{Cov}(x_{itj},a_i)=0,\quad\forall t=1,2,\ldots,T\quad\mathrm{y}\quad\forall j=1,2,\ldots,k.
 \label{eq:14.8}
-\end{equation*}
+\end{equation}
 
 Este modelo incluye todos los supuestos de los efectos fijos, con el requisito adicional de que $a_i$ es
 independiente de todas las variables explicativas en todos los periodos. Si $a_i$ está correlacionado con
@@ -3243,10 +3246,10 @@ en los errores se define como:
 $$\phi= \begin{bmatrix} \frac{\sigma_u^2}{\sigma_u^2+T\sigma_a^2} \end{bmatrix}^{1/2}$$
 
 donde $\phi$ está entre cero y uno. La ecuación transformada resulta en:
-\begin{equation*}
+\begin{equation}
 y_{it}-\phi\bar{y}_i=\beta_0(1-\phi)+\beta_1(x_{it1}-\phi\bar{x}_{i1})+\cdots+\beta_k(x_{itk}-\phi\bar{x}_{ik})+(v_{it}-\phi\bar{v}_i)
 \label{eq:14.11}
-\end{equation*}
+\end{equation}
 
 donde la barra indica promedios a lo largo del tiempo. Esta transformación permite incluir variables
 explicativas que son constantes en el tiempo, una ventaja de los efectos aleatorios (EA) sobre los efectos
@@ -3273,7 +3276,7 @@ para entender la naturaleza de los sesgos introducidos al dejar el efecto inobse
 de error. Sin embargo, incluso si $a_i$ no se correlaciona con ninguna variable explicativa, los errores
 estándar de MCO combinados suelen ser inválidos debido a la correlación serial en $v_{it} = a_i + u_{it}$. Los
 paquetes estadísticos modernos permiten calcular errores estándar robustos frente a correlación serial y
-heterocedasticidad en $v_it$.
+heterocedasticidad en $v_{it}$.
 
 \subsection*{Efectos aleatorios o efectos fijos}
 
@@ -3307,6 +3310,66 @@ para elegir entre EF y EA es la posibilidad de suponer convincentemente que $a_i
 $x_{itj}$ . En aplicaciones con datos de panel, especialmente cuando la unidad de observación es una unidad
 geográfica grande, tiene sentido considerar $a_i$ como un intercepto separado para cada unidad de corte
 transversal, lo que justifica el uso de EF.
+
+\section{Apéndice}
+
+\subsection*{Apéndice 10.2: Errores estándar de la regresión de efectos fijos}
+
+\subsubsection*{La distribución asintótica del estimador de efectos fijos con n grande}
+
+\paragraph{El estimador de efectos fijos} correspondiente a desviaciones respecto a la meda donde 
+$\tilde{Y}_{it}=Y_{it}-\bar{Y}_{i},\tilde{X}_{it}=X_{it}-\bar{X}_{i},\bar{Y}_{i}=T^{-1}\Sigma_{i=1}^{T}Y_{it}\mathbf{y}\bar{X}_{i}=T^{-1}\Sigma_{i=1}^{T}X_{it}$ 
+. La fórmula se obtiene sustituyendo la sumatoria simple por dos sumatorias, una sobre entidades y otra sobre periodos de tiempo tal que:
+$$\widehat{\beta}_1=\frac{\sum_{i=1}^n\sum_{i=1}^T\widetilde{X}_{it}\widetilde{Y}_{it}}{\sum_{i=1}^n\sum_{t=1}^T\widetilde{X}_{it}^2}$$
+
+Para la obtención de su distribución muestral se realiza de forma igual que en MCO común. Se sustituye $\tilde{Y}_{it}=\beta_1\tilde{X}_{it}+\tilde{u}_{it}$ en el 
+numerador para obtener lo siguiente:
+$$\widehat{\beta}_{1}=\beta_{1}+\frac{\frac{1}{nT}\sum_{i\operatorname{=}1}^{n}\sum_{t\operatorname{=}1}^{T}\tilde{X}_{it}\tilde{u}_{it}}{\frac{1}{nT}\sum_{i\operatorname{=}1}^{n}\sum_{t\operatorname{=}1}^{T}\tilde{X}_{it}^{2}}$$
+
+Reorganizando la expresión y multiplicando ambos lados por $\sqrt{nT}$ se obtiene:
+\begin{align*}
+\sqrt{nT}(\hat{\beta}_{1}-\beta_{1})&=\frac{\sqrt{\frac{1}{n}}\sum_{i=1}^{n}\eta_{i}}{\hat{Q}_{\tilde{X}}}\\
+\text{donde}\quad\eta_{i}=\sqrt{\frac{1}{T}}\sum_{t=1}^{T}\tilde{X}_{it}\tilde{u}_{it}\quad&\text{y}\quad\hat{Q}_{\tilde{X}}=\frac{1}{nT}\sum_{i=1}^{n}\sum_{t=1}^{T}\tilde{X}_{it}^{2}
+\end{align*}
+
+\paragraph{Distribución y errores estándar cuando n es grande} . Bajo los supuestos del concepto clave 10.3 (\ref{cc:10.3}), $\hat{Q}_{\tilde{X}}\xrightarrow{p}Q_{\tilde{X}}=ET^{-1}\sum_{t=1}^{T}\tilde{X}_{it}^{2}$ cuando 
+$n\rightarrow\infty$. Además $\eta_i$ es i.i.d. para $i=1,\dots,n$ (por el supuesto 2) con media cero (por el supuesto 1) y varianza $\sigma_{\eta}^2$ que es finita (por el supuesto 3) 
+, por lo que el teorema central del límite es aplicable $\sqrt{1/n}\sum_{i=1}^n\eta_i\xrightarrow{d}N(0,\sigma_\eta^2)$. Se obtiene entonce que:
+$$\sqrt{nT}(\widehat{\beta}_1-\beta_1)\xrightarrow{d}-N\left(0,\frac{\sigma_\eta^2}{Q_{\tilde{X}}^2}\right)$$
+
+De acuerdo a esto último la varianza de la distribución de muestras grandes de $\hat{\beta}_1$ es:
+$$\mathrm{var}(\widehat{\beta}_1)=\frac{1}{nT}\frac{\sigma_\eta^2}{Q_{\tilde{X}}^2}$$
+
+La fórmula de los errores estándar agrupados sustituye los momento poblacionales de esta ecuación por sus sustitutos muestrales:
+\begin{align*}
+ES(\hat{\beta}_{1})&=\sqrt{\frac{1}{nT}\frac{s_{\eta}^{2}}{\hat{Q}_{\tilde{x}}^{2}}} \\
+\text{donde}\quad s_{\eta}^{2}&=\frac{1}{n-1}\sum_{i=1}^{n}(\hat{\eta}_{\mathrm{i}}-\bar{\hat{\eta}})^{2}=\frac{1}{n-1}\sum_{i=1}^{n}\hat{\eta}_{i}^{2}\quad(\text{errores estandar agrupados})
+\end{align*}
+
+Donde $\hat{\eta}_{i}=\sqrt{1/T}\Sigma_{t=1}^{T}\tilde{X}_{it}\hat{u}_{it}$ es el homólogo muestral de $\eta_i$, 
+y $\bar{\hat{\eta}}=(1/n)\sum_{i=1}^n\hat{\eta}_i$. La última igualdad ocurre porque $\bar{\hat{\eta}}=0$, que se desprende 
+de que los residuos y los regresores no estan correlacionados. Téngase en cuenta que $s^n_{\hat{\eta}}$ es un estimador de la varianza muestral de 
+$\hat{\eta}_i$, este es un estimador consistente de $\sigma_{\eta}^2$ a medida que $n\rightarrow\infty$ en presencia de heterocedásticidad o 
+autocorrelación, debido a esto el estadísitco t tiene una distribución normal estándar bajo la hipótesis nula cuando $n\rightarrow\infty$.
+
+Esto es aplicable a regresión múltiple y el estadistico F para el contraste de q restricciones se distribuye como $F_{q,\infty}$.
+
+\paragraph{¿Por qué no es válido el estimaodr habitual heterocedástico-robusto para los datos de panel?}
+. Existen 2 razones, la primera es que no permite la correlación serial dentro de un grupo (cluster). La varianza $\eta_i$ puede escribirse como 
+la suma de las varianzas más las covarianzas. Sea $\tilde{v}_{it}=\tilde{X}_{it}\tilde{u}_{it}$; Entonces:
+\begin{align*}
+\mathrm{var}(\eta_{i})=\mathrm{var}\left(\sqrt{\frac{1}{T}}\sum_{t=1}^{T}\widetilde{\nu}_{it}\right)=\frac{1}{T}\mathrm{var}\left(\widetilde{\nu}_{i1}+\widetilde{\nu}_{i2}+\cdots+\widetilde{\nu}_{iT}\right) \\
+=\frac{1}{T}\mathrm{var}(\widetilde{\nu}_{i1})+\mathrm{var}(\widetilde{\nu}_{i2})+\cdot\cdot+\mathrm{var}(\widetilde{\nu}_{iT}) \\
++2\mathrm{cov}(\widetilde{\nu}_{i1},\widetilde{\nu}_{i2})+\cdots+2\mathrm{cov}(\widetilde{\nu}_{iT-1},\widetilde{\nu}_{iT})].
+\end{align*}
+
+La fórmula del capítulo 5 obvia todas las covarianzas de la parte final, por lo que si existe correlación serial es estimador 
+heterocedástico-robusto es inconsistente.
+
+La segunda razón es que si $T$ es pequeño, la estimación de los efectos fijos introduce sesgo en el estimador heterocedástico-robusto. 
+El único caso en el que pueden utilizarse los errores heterocedástico-robustos habituales con datos de panel es con la regresión e efectos 
+fijos con $T=2$, siendo equivalentes los errores heterocedástico-robustos y los estándar agrupados.
+
 
 % ------------------------------------------
 % CAPÍTULO 11
