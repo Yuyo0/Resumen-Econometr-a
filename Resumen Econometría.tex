@@ -3382,7 +3382,7 @@ fijos con $T=2$, siendo equivalentes los errores heterocedástico-robustos y los
 
 El modelo con una variable dependiente binaria consiste en interpretar la regresión como la modelización
 de la probabilidad de que la variable dependiente sea igual a 1. la función de regresión poblacional es el
-valor esperado de Y dados los regresores, condicionado al valor de los regresores.
+valor esperado de Y dados los regresores.
 $$E(Y\mid X_1,\ldots,X_k)=Pr(Y=1\mid X_1,\ldots,X_k)$$
 
 \subsection*{El modelo de probabilidad lineal}
@@ -3467,8 +3467,8 @@ $$\Pr(Y=1\mid X)=\Lambda(\beta_0+\beta_1X)$$
 donde $\Lambda$ es la función de distribución acumulada logística, definida como:
 $$\Lambda(z)=\frac{1}{1+e^{-z}}$$
 
-Los coeficientes del modelo logit se estiman mediante el método de máxima verosimilitud, que es consis-
-tente y normalmente distribuido en muestras grandes, permitiendo la construcción de estadísticos (t) e
+Los coeficientes del modelo logit se estiman mediante el método de máxima verosimilitud, que es consistente 
+y normalmente distribuido en muestras grandes, permitiendo la construcción de estadísticos (t) e
 intervalos de confianza de manera habitual. Las funciones de regresión logit y probit son muy similares,
 con diferencias mínimas. Históricamente, la regresión logística se prefería por su rapidez de cálculo, pero
 con los avances en computación, esta diferencia ya no es relevante.
@@ -3518,8 +3518,8 @@ verosimilitud para los coeficientes probit.
 \subsection*{Estimación máximo verosímil (\textit{Este metodo usamos})}
 
 La función de verosimilitud es la distribución de probabilidad conjunta de los datos (Dado que las
-suponemos independientes es su productorio), considerada como una función de los coeficientes descono-
-cidos. Para n observaciones independientes, la función de verosimilitud es:
+suponemos independientes es su productorio), considerada como una función de los coeficientes desconocidos. 
+Para n observaciones independientes, la función de verosimilitud es:
 $$L(\theta;x_1,\ldots,x_n)=f(x_1;\theta)f(x_2;\theta)\cdots f(x_n;\theta)$$
 
 Para simplificar los cálculos, se utiliza el logaritmo de la función de verosimilitud:
@@ -3544,7 +3544,11 @@ estimadas.
 \paragraph{EMV de n variables aleatorias i.i.d. de Bernoulli} El primer paso en el cálculo del EMV es
 obtener la distribución de probabilidad conjunta. Para n observaciones i.i.d. de una variable aleatoria
 de Bernoulli, la distribución de probabilidad conjunta es:
-$$\Pr(Y_1=y_1,Y_2=y_2,\ldots,Y_n=y_n)=\prod_{i=1}^np^{y_i}(1-p)^{1-y_i}$$
+\begin{align*}
+\Pr(Y_1=y_1,Y_2=y_2,\ldots,Y_n=y_n) & =\left[p^{y_1}(1-p)^{\left(1-y_1\right)}\right] \times\left[p^{y_2}(1-p)^{\left(1-y_2\right)}\right] \times \cdots \times\left[p^{y_n}(1-p)^{\left(1-y_n\right)}\right] \\
+& =p^{\left(y_1+\cdots+y_n\right)}(1-p)^{n-\left(y_1+\cdots+y_n\right)} \\
+& =\prod_{i=1}^np^{y_i}(1-p)^{1-y_i}
+\end{align*}
 
 Esto se puede expresar de manera compacta como:
 $$\Pr(Y_1=y_1,\ldots,Y_n=y_n)=p^{\sum_{i=1}^ny_i}(1-p)^{n-\sum_{i=1}^ny_i}$$
@@ -3563,14 +3567,20 @@ $$\frac{d}{dp}\ln\mathcal{L}(p)=\frac{S}{p}-\frac{n-S}{1-p}$$
 Igualando la derivada a cero y resolviendo para $p$, se obtiene el estimador de máxima verosimilitud $\hat{p}=\frac{S}{n}$.
 
 \paragraph{EMV del modelo Probit} En el modelo probit, la probabilidad de que $Y_i = 1$, condicionada a
-$X_{1i},\dots , X_{ki}$, es $p_i = \phi(\beta_0 + \beta_1 X_{1i} +\dots + \beta_k X_{ki})$, donde $\phi$(·) es la función de distribución acumulativa
+$X_{1i},\dots , X_{ki}$, es $p_i = \Phi(\beta_0 + \beta_1 X_{1i} +\dots + \beta_k X_{ki})$, donde $\Phi$(·) es la función de distribución acumulativa
 de la normal estándar. La distribución de probabilidad condicional para la observación i-ésima es:
-$$\Pr(Y_i=y_i\mid X_{1i},\ldots,X_{ki})=p_i^{y_i}(1-p_i)^{1-y_i}$$
+\begin{align*}
+\operatorname{Pr}\left(Y_1\right. & \left.=y_1, \ldots, Y_n=y_n \mid X_{1 i}, \ldots, X_{k i}, i=1, \ldots, n\right) \\
+& =\operatorname{Pr}\left(Y_1=y_1 \mid X_{11}, \ldots, X_{k 1}\right) \times \ldots \times \operatorname{Pr}\left(Y_n=y_n \mid X_{1 n}, \ldots, X_{k n}\right) \\
+& =p_1^{y_1}\left(1-p_1\right)^{1-y_1} \times \ldots \times p_n^{y_n}\left(1-p_n\right)^{1-y_n} .
+\end{align*}
 
 Asumiendo que las observaciones son i.i.d., la función $\ln L(\beta_0 +\dots + \beta_k ; Y_1, \dots , Y_n \mid X_{1i}, \dots , X_{ki})$
 de log-verosimilitud es:
 \begin{align*}
-\sum_{i=1}^n [Y_i\ln(\Phi(\beta_0+\beta_1X_{1i}+\cdots+\beta_kX_{ki}))+ \\ (1-Y_i) \ln(1-\Phi(\beta_0+\beta_1 X_{1i}+\cdots+\beta_k X_{ki}))]
+\ln [f_{probit} &(\beta_0 +\dots + \beta_k ; Y_1, \dots , Y_n \mid X_{1i}, \dots , X_{ki}), i=1, \dots , n] = \\
+ &\sum_{i=1}^n [Y_i\ln(\Phi(\beta_0+\beta_1X_{1i}+\cdots+\beta_kX_{ki}))+ \\ 
+ &(1-Y_i) \ln(1-\Phi(\beta_0+\beta_1 X_{1i}+\cdots+\beta_k X_{ki}))]
 \end{align*}
 
 Dado que no existe una fórmula cerrada para el EMV en este caso, la maximización de la función de
@@ -3580,16 +3590,21 @@ verosimilitud se realiza mediante métodos numéricos.
 probit. La diferencia radica en que la probabilidad condicional de éxito $p_i$ se define como:
 $$p_i=\frac{1}{1+e^{-(\beta_0+\beta_1X_{1i}+\cdots+\beta_kX_{ki})}}$$
 
-El logaritmo de la función de verosimilitud es similar al del modelo probit, con la sustitución de $\phi$(·)
+El logaritmo de la función de verosimilitud es similar al del modelo probit, con la sustitución de $\Phi$(·)
 por $p_i$.
 
 \paragraph{Errores estándar de las probabilidades estimadas} Considerando un único regresor en el modelo
-probit, la probabilidad estimada $\hat{p}(x)$ dado un valor fijo del regresor x es $\hat{p}(x) = \phi( \hat{\beta}_0 + \hat{\beta}_1 x)$. La varianza
-de esta probabilidad estimada se obtiene mediante una expansión de Taylor de primer orden:
-$$\hat{p}(x)\approx\Phi(\beta_0+\beta_1x)+a_0(\hat{\beta}_0-\beta_0)+a_1(\hat{\beta}_1-\beta_1)$$
+probit, la probabilidad estimada $\hat{p}(x)$ dado un valor fijo del regresor x es $\hat{p}(x) = \Phi( \hat{\beta}_0 + \hat{\beta}_1 x)$
+Donde $\hat{\beta}_0^{EMV}$ y $\hat{\beta}_1^{EMV}$ son los EMV de los 2 coeficientes probit. La varianza de la distribución muestral de
+esta probabilidad estimada se obtiene mediante una expansión de Taylor de primer orden:
+$$\hat{p}(x)=\Phi\left(\hat{\beta}_0^{E M V}+\hat{\beta}_1^{E M V} x\right) \cong c+a_0\left(\hat{\beta}_0^{E M V}-\beta_0\right)+a_1\left(\hat{\beta}_1^{E M V}-\beta_1\right)$$
 
-donde $a_0$ y $a_1$ son las derivadas parciales. La varianza de $\hat{p}(x)$ es:
-$$\mathrm{Var}[\hat{p}(x)]\approx a_0^2\mathrm{Var}(\hat{\beta}_0)+a_1^2\mathrm{Var}(\hat{\beta}_1)+2a_0a_1\mathrm{Cov}(\hat{\beta}_0,\hat{\beta}_1)$$
+donde $a_0$ y $a_1$ son las derivadas parciales y $c$ una constante donde $c=\Phi(\hat{\beta}_0^{E M V})$ y $a_0=\frac{\partial \Phi (\beta_0 + \beta_1x)}{\partial \beta_0}\mid \hat{\beta}_0^{E M V},\hat{\beta}_1^{E M V}$
+y $a_1=\frac{\partial \Phi (\beta_0 + \beta_1x)}{\partial \beta_1}\mid \hat{\beta}_0^{E M V},\hat{\beta}_1^{E M V}$. La varianza de $\hat{p}(x)$ es:
+\begin{align*}
+\operatorname{var}[\hat{p}(x)] & \cong \operatorname{var}\left[c+a_0\left(\hat{\beta}_0^{E M V}-\beta_0\right)+a_1\left(\hat{\beta}_1^{E M V}-\beta_1\right)\right]= \\
+& =a_0^2 \operatorname{var}\left(\hat{\beta}_0^{E M V}\right)+a_1^2 \operatorname{var}\left(\hat{\beta}_1^{E M V}\right)+2 a_0 a_1 \operatorname{cov}\left(\hat{\beta}_0^{E M V}, \hat{\beta}_1^{E M V}\right)
+\end{align*}
 
 Finalmente, el error estándar de $\hat{p}(x)$ se calcula a partir de esta varianza.
 
@@ -3610,7 +3625,6 @@ el valor de la verosimilitud maximizada, al igual que la adición de un regresor
 la suma de los cuadrados de los residuos en la regresión lineal por MCO. Este hecho sugiere medir la
 calidad de ajuste de un modelo probit mediante la comparación del valor de la función de verosimilitud
 maximizada con todas las variables explicativas con el valor de la función de verosimilitud sin regresores.
-Es decir, lo que hace el pseudo-$R^2$. Se proporciona una fórmula para el pseudo-$R^2$ en el Apéndice 11.2.
 $$\mathrm{Pseudo-}R^2=1-\frac{\ln(\mathcal{L}_{\max}^{\mathrm{probit}})}{\ln(\mathcal{L}_{\max}^{\mathrm{Bernoulli}})}$$
 
 \section{Modelos de variables dependiente limitada y correcciones a la selección muestral (wooldridge)}
